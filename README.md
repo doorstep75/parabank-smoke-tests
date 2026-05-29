@@ -76,7 +76,7 @@ npx playwright show-report
 ## Project structure
 
 ```
-fixtures/         auth fixture — handles login for tests that require it
+fixtures/         auth fixture that handles login for tests that require it
 pages/            page object models for each journey
 tests/
   smoke/          the 3 core smoke tests
@@ -89,26 +89,26 @@ tests/
 
 - A valid ParaBank account exists and credentials are provided via `.env`
 - The ParaBank demo environment is available and stable
-- Tests run against Chromium by default — Firefox and WebKit are available but commented out in `playwright.config.ts` to keep the demo run focused
-- Static test data is used for demo purposes — see scaling notes below
+- Tests run against Chromium by default. Firefox and WebKit are available but commented out in `playwright.config.ts` to keep the demo run focused
+- Static test data is used for demo purposes, see scaling notes below
 - The login page does not need asserting before credentials are entered
-- For Bill Pay, payee address details are placeholder data — the meaningful assertions are on the payment confirmation
+- For Bill Pay, payee address details are placeholder data.  The meaningful assertions are on the payment confirmation
 - TypeScript was chosen over JavaScript as it is my current day-to-day automation language. I am comfortable writing in JavaScript where required and would be happy to do so if that is the team's preference.
 
 ---
 
 ## Why these 3 scenarios
 
-The three tests were selected using a risk-based approach — prioritising the journeys with the highest financial impact if broken post-deployment.
+The three tests were selected using a risk-based approach, prioritising the journeys with the highest financial impact if broken post-deployment.
 
 **1. Login and Accounts Overview**
 Everything in the application is gated behind authentication. If login fails, no user can access any feature. This is the highest priority smoke test for any session-based application. The accounts overview is asserted as part of the same test as it is the immediate landing page and confirms the session is active and account data has loaded.
 
 **2. Transfer Funds**
-Transferring money is a core, frequent banking action. A broken transfer engine has direct and immediate financial consequences for users — missed payments, failed transactions, potential penalties. This is tested second as it depends on a successful login.
+Transferring money is a core, frequent banking action. A broken transfer engine has direct and immediate financial consequences for users e. g. missed payments, failed transactions, potential penalties. This is tested second as it depends on a successful login.
 
 **3. Bill Pay**
-Similar risk profile to transfers — failing to pay a bill on time can result in financial penalties or missed critical payments. This is a distinct journey from Transfer Funds, using a different form and a separate API call, making it a meaningful addition to the smoke suite.
+Similar risk profile to transfers e. g. failing to pay a bill on time can result in financial penalties or missed critical payments. This is a distinct journey from Transfer Funds, using a different form and a separate API call, making it a meaningful addition to the smoke suite.
 
 Journeys considered and deprioritised:
 
@@ -125,7 +125,7 @@ On a personal level, these three felt like the journeys I would want working fir
 
 **Additional smoke tests:**
 
-- Open New Account — proves the account creation flow end to end
+- Open New Account - proves the account creation flow end to end
 - Update Contact Info — important for users with recent address or phone changes
 
 **Regression coverage:**
@@ -146,7 +146,7 @@ On a personal level, these three felt like the journeys I would want working fir
 
 - Dynamic user generation using a helper and global setup, to avoid reliance on a static test account on a shared demo environment
 - Fixture file for multiple user types (standard, locked, new) to support a wider regression suite
-- `data-testid` attributes requested from developers on key table cells and form elements to enable more precise and stable assertions — particularly on the accounts overview table
+- `data-testid` attributes requested from developers on key table cells and form elements to enable more precise and stable assertions, particularly on the accounts overview table
 
 ---
 
@@ -156,10 +156,10 @@ ParaBank is an older application and its HTML lacks label tags, ARIA attributes,
 
 Specific observations:
 
-- Login fields use `[name="username"]` and `[name="password"]` — no labels in the HTML
-- Transfer form fields use `id` attributes — no labels, but IDs are stable
-- Bill Pay fields use `name` attributes — consistent and stable
-- Accounts table cells have no targeting attributes — granular cell assertions were avoided in favour of table-level and link-level assertions
+- Login fields use `[name="username"]` and `[name="password"]` no labels in the HTML
+- Transfer form fields use `id` attributes.  No labels but IDs are stable
+- Bill Pay fields use `name` attributes that are consistent and stable
+- Accounts table cells have no targeting attributes.  Granular cell assertions were avoided in favour of table-level and link-level assertions
 
 In a real engagement I would raise these as testability improvements with the development team.
 
@@ -181,13 +181,13 @@ All optional items from the brief are implemented:
 
 ---
 
-## Bonus — API test
+## Bonus API test
 
 A bonus API test is included in `tests/bonus/` demonstrating Playwright's native API testing capability using session reuse from the authenticated browser context.
 
-The test authenticates via the UI, then uses `context.request` to call the ParaBank REST API directly — a legitimate and common pattern for session-authenticated applications where a standalone login endpoint is not publicly exposed.
+The test authenticates via the UI, then uses `context.request` to call the ParaBank REST API directly.  It's a legitimate and common pattern for session-authenticated applications where a standalone login endpoint is not publicly exposed.
 
-Transfer Funds would be a strong candidate for API-level smoke testing in a real environment — financial data integrity is better verified at the API layer than through visual confirmation alone.
+Transfer Funds would be a strong candidate for API-level smoke testing in a real environment. Financial data integrity is better verified at the API layer than through visual confirmation alone.
 
 Note: the account ID in the bonus test is currently static and tied to the test account. In a production suite this would be resolved dynamically from the accounts list post-login.
 
@@ -202,4 +202,4 @@ AI tooling was used during the development of this suite in the following ways:
 - Checking adherence to KISS and DRY principles across page objects and fixtures
 - Proofreading and improving the wording and structure of this README
 
-All test design decisions, scenario selection, risk-based reasoning, and implementation were my own.
+All test design decisions, scenario selection, risk-based reasoning and implementation were my own.
