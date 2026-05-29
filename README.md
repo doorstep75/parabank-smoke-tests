@@ -47,22 +47,22 @@ SECOND_NAME=your_second_name
 
 ## Running the tests
 
-Run all tests headless:
-
-```bash
-npx playwright test
-```
-
 Run with the Playwright UI (recommended for local debugging):
 
 ```bash
 npx playwright test --ui
 ```
 
-Run smoke tests only:
+Run smoke tests only headless:
 
 ```bash
 npx playwright test tests/smoke
+```
+
+Run all tests headless:
+
+```bash
+npx playwright test
 ```
 
 View the HTML report after a run:
