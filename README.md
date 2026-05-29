@@ -189,7 +189,7 @@ The test authenticates via the UI, then uses `context.request` to call the ParaB
 
 Transfer Funds would be a strong candidate for API-level smoke testing in a real environment. Financial data integrity is better verified at the API layer than through visual confirmation alone.
 
-Note: the account ID in the bonus test is currently static and tied to the test account. In a production suite this would be resolved dynamically from the accounts list post-login.
+> **Note:** the account ID in the bonus test is currently static and tied to the test account. In a production suite this would be resolved dynamically from the accounts list post-login.
 
 Therefore the bonus API test is excluded from the CI run as it relies on a static account ID tied to the test environment. Run it locally with npx playwright test tests/bonus.
 
