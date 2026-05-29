@@ -17,10 +17,13 @@ All commands should be run from a terminal in the project root directory.
 ```bash
 git clone https://github.com/doorstep75/parabank-smoke-tests.git
 cd parabank-smoke-tests
-npm install
+npm install*
 npx playwright install
 ```
-
+* If installing on a corporate network, SSL certificate errors may occur with `npm install`. Running the following command before installing resolves this:
+```bash
+  npm config set strict-ssl false
+```
 ### Environment configuration
 
 Create a `.env` file from the provided example:
