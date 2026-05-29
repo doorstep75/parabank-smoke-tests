@@ -13,7 +13,7 @@ export class OverviewPage {
     this.accountServicesHeading = page.getByRole('heading', { name: 'Account Services' });
     this.accountsOverviewHeading = page.getByRole('heading', { name: 'Accounts Overview' });
     this.accountTable = page.locator('#accountTable');
-    this.accountLink = page.getByRole('link', { name: /\d+/ });
+    this.accountLink = page.getByRole('link', { name: /\d+/ }).first(); // check at least one account link exists
     this.balanceDisclaimer = page.getByText('Balance includes deposits');
   }
 
