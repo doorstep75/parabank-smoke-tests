@@ -9,7 +9,7 @@ export class OverviewPage {
   readonly balanceDisclaimer;
 
   constructor(private page: Page) {
-    this.welcomeHeading = page.getByText('Welcome');
+    this.welcomeHeading = page.locator('p.smallText').getByText(/Welcome \w+/);
     this.accountServicesHeading = page.getByRole('heading', { name: 'Account Services' });
     this.accountsOverviewHeading = page.getByRole('heading', { name: 'Accounts Overview' });
     this.accountTable = page.locator('#accountTable');
