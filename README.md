@@ -184,7 +184,7 @@ All optional items from the brief are implemented:
 | Reporting                 | HTML reporter configured in `playwright.config.ts` — run `npx playwright show-report` |
 | Parallel execution        | `fullyParallel: true` in `playwright.config.ts`                                       |
 | CI integration            | GitHub Actions workflow in `.github/workflows/` — triggers on push and PR to main     |
-| Trace on failure          | `trace: 'on-first-retry'` in `playwright.config.ts`                                   |
+| Trace on failure          | `trace: 'retain-on-failure'` in `playwright.config.ts` — run `npx playwright show-trace` on the zip in `test-results/` |
 | Screenshots on failure    | `screenshot: 'only-on-failure'` in `playwright.config.ts`                             |
 | Environment configuration | `process.env` via `.env` — template provided in `.env.example`                        |
 | Retry strategy            | `retries: process.env.CI ? 2 : 0` in `playwright.config.ts` — retries on CI only      |

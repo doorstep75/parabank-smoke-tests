@@ -27,7 +27,7 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'https://parabank.parasoft.com/parabank/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     launchOptions: {
       args: ['--disable-autofill-keyboard-accessory-view', '--disable-features=AutofillServerCommunication']
