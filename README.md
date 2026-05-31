@@ -39,9 +39,11 @@ Then fill in your credentials:
 ```
 APP_USERNAME=your_username
 PASSWORD=your_password
-FIRST_NAME=your_first_name
-SECOND_NAME=your_second_name
 ```
+
+### ParaBank account and database state
+
+> **Note:** The ParaBank demo database resets periodically, which may cause the API test to fail. If this happens, use the Admin page to **Clean** and **Initialize** the database, re-register your account, and update `.env` if your credentials changed.
 
 ---
 
@@ -87,7 +89,7 @@ tests/
 
 ## Assumptions
 
-- A valid ParaBank account exists and credentials are provided via `.env`
+- A valid ParaBank account exists, credentials are provided via `.env`, and the database has been initialised as described in Setup
 - The ParaBank demo environment is available and stable
 - Tests run against Chromium by default. Firefox and WebKit are available but commented out in `playwright.config.ts` to keep the demo run focussed
 - Static test data is used for demo purposes, see scaling notes below
