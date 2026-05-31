@@ -13,7 +13,7 @@ test('Transfer funds between accounts via API', async ({ request }) => {
     await expect(response).toBeOK();
     const customer = await response.json();
     customerId = customer.id;
-    expect(customerId).toBeDefined();
+    expect(customerId).toBeGreaterThan(0);
   });
 
   await test.step('Get account details and confirm initial balance', async () => {
@@ -26,8 +26,8 @@ test('Transfer funds between accounts via API', async ({ request }) => {
     expect(accounts.length).toBeGreaterThan(0);
     accountId = accounts[0].id;
     balanceBefore = accounts[0].balance;
-    expect(accountId).toBeDefined();
-    expect(balanceBefore).toBeDefined();
+    expect(accountId).toBeGreaterThan(0);
+    expect(typeof balanceBefore).toBe('number');
   });
 
   await test.step('Transfer $1 via API', async () => {
