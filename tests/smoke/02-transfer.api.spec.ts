@@ -10,7 +10,8 @@ test('Transfer funds between accounts via API', async ({ request }) => {
       `/parabank/services/bank/login/${process.env.APP_USERNAME}/${process.env.PASSWORD}`,
       { headers: { accept: 'application/json' } }
     );
-    await expect(response).toBeOK();
+    expect(response.status()).toBe(200);
+    expect(response.headers()['content-type']).toContain('application/json');
     const customer = await response.json();
     customerId = customer.id;
     expect(customerId).toBeGreaterThan(0);
@@ -21,7 +22,8 @@ test('Transfer funds between accounts via API', async ({ request }) => {
       `/parabank/services/bank/customers/${customerId}/accounts`,
       { headers: { accept: 'application/json' } }
     );
-    await expect(response).toBeOK();
+    expect(response.status()).toBe(200);
+    expect(response.headers()['content-type']).toContain('application/json');
     const accounts = await response.json();
     expect(accounts.length).toBeGreaterThan(0);
     accountId = accounts[0].id;
@@ -34,7 +36,8 @@ test('Transfer funds between accounts via API', async ({ request }) => {
     const response = await request.post(
       `/parabank/services/bank/transfer?fromAccountId=${accountId}&toAccountId=${accountId}&amount=1`
     );
-    await expect(response).toBeOK();
+    expect(response.status()).toBe(200);
+    expect(response.headers()['content-type']).toContain('application/xml');
   });
 
   await test.step('Verify balance unchanged after same-account transfer', async () => {
@@ -42,7 +45,8 @@ test('Transfer funds between accounts via API', async ({ request }) => {
       `/parabank/services/bank/accounts/${accountId}`,
       { headers: { accept: 'application/json' } }
     );
-    await expect(response).toBeOK();
+    expect(response.status()).toBe(200);
+    expect(response.headers()['content-type']).toContain('application/json');
     const accountAfter = await response.json();
     expect(accountAfter.balance).toBe(balanceBefore);
   });
