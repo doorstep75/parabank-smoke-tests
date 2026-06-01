@@ -1,13 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/auth.fixture';
 
-test('Transfer funds between accounts via API', async ({ request }) => {
+test('Transfer funds between accounts via API', async ({ request, credentials }) => {
   let customerId: number;
   let accountId: number;
   let balanceBefore: number;
 
   await test.step('Authenticate and get customer ID', async () => {
     const response = await request.get(
-      `/parabank/services/bank/login/${process.env.APP_USERNAME}/${process.env.PASSWORD}`,
+      `/parabank/services/bank/login/${credentials.username}/${credentials.password}`,
       { headers: { accept: 'application/json' } }
     );
     expect(response.status()).toBe(200);
